@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import tristeFoto from '../assets/triste.svg';
 import felizFoto from '../assets/feliz.svg';
@@ -11,7 +12,11 @@ import correcto from '../assets/correcto.svg';
 
 import advertencia from '../assets/advertencia.svg';
 
+import bannerJuegoCompletado from '../assets/bannerJuegoCompletado.svg';
+
 function AssociateGame2() {
+    const navigate = useNavigate();
+
     const [pairs] = useState([
         { word: 'Feliz', image: felizFoto, color: '#D1C7A8' },
         { word: 'Molesto', image: molestoFoto, color: '#A7C6ED' },
@@ -22,13 +27,14 @@ function AssociateGame2() {
     const [imageSelections, setImageSelections] = useState({});
     const [showResults, setShowResults] = useState(false);
     const [showSkipModal, setShowSkipModal] = useState(false);
+    const [gameCompleted, setGameCompleted] = useState(false);  // Nuevo estado
 
     const handleWordClick = (word) => {
-        if (!showResults) setSelectedWord(word);
+        if (!showResults && !gameCompleted) setSelectedWord(word);
     };
 
     const handleImageClick = (imageWord) => {
-        if (selectedWord && !showResults) {
+        if (selectedWord && !showResults && !gameCompleted) {
             setImageSelections((prev) => {
                 const updated = { ...prev };
                 for (const key in updated) {
@@ -59,12 +65,42 @@ function AssociateGame2() {
         return imageSelections[imageWord] === correctAssociations[imageWord];
     };
 
-    // Función para confirmar skip
     const confirmSkip = () => {
         setImageSelections(correctAssociations);
         setShowSkipModal(false);
         setShowResults(true);
     };
+
+    if (gameCompleted) {
+        // Pantalla final centrada
+        return (
+            <div className="min-h-screen bg-primary flex flex-col items-center p-4">
+                {/* Encabezado superior */}
+                <header className="w-full max-w-xl text-center mt-6 mb-8">
+                    <h2 className="text-neutral-900 font-bold text-3xl mb-2">Juego Completado</h2>
+                    <p className="text-gray-700 text-lg">¡Bien hecho! Continua con el buen trabajo</p>
+                </header>
+
+                {/* Contenedor centrado solo para el SVG */}
+                <div className="flex-grow flex items-center justify-center w-full max-w-md">
+                    <img
+                        src={bannerJuegoCompletado}
+                        alt="Juego completado"
+                        className="w-full"
+                    />
+                </div>
+
+                {/* Botón debajo del SVG */}
+                <button
+                    className="mt-6 mb-8 px-16 bg-teal-400 text-white py-3 rounded-md shadow hover:bg-teal-600 transition"
+                    onClick={() => navigate('/games')}
+                >
+                    Continuar
+                </button>
+            </div>
+        );
+
+    }
 
     return (
         <div className="min-h-screen bg-primary p-4 flex flex-col relative">
@@ -111,10 +147,8 @@ function AssociateGame2() {
             {showResults && (
                 <div className="self-center mt-4">
                     <button
-                        className="bg-blue-600 text-white px-6 py-2 rounded-md shadow hover:bg-blue-700 transition"
-                        onClick={() => {
-                            // Aquí acción futura para continuar
-                        }}
+                        className="bg-blue-600 text-white px-6 py-2 mb-4 rounded-md shadow hover:bg-blue-700 transition"
+                        onClick={() => setGameCompleted(true)}  // Aquí cambiamos estado
                     >
                         Continuar
                     </button>
