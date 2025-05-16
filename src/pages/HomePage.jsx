@@ -23,8 +23,21 @@ export default function HomePage() {
     const [showSidebar, setShowSidebar] = useState(false);
     const [showMessage, setShowMessage] = useState(false);
 
+    //Probar Cookies saludo
+    const [mensajeBienvenida, setMensajeBienvenida] = useState('');
+
     // Array con las imágenes para los primeros 3 juegos y default para los demás
     const gameBackgrounds = [frases, asociar, escuchar, defaultBg, defaultBg, defaultBg];
+
+    //Probar Cookies saludo
+    useEffect(() => {
+        const mensaje = localStorage.getItem('mensajeBienvenida');
+        if (mensaje) {
+            setMensajeBienvenida(mensaje);
+            // Limpia el mensaje para que no se muestre cada vez que vuelve
+            localStorage.removeItem('mensajeBienvenida');
+        }
+    }, []);
 
     // Ocultar mensaje automáticamente después de 3 segundos
     useEffect(() => {
@@ -50,6 +63,14 @@ export default function HomePage() {
 
             {/* Sidebar configuración */}
             {showSidebar && <SidebarSettings onClose={() => setShowSidebar(false)} />}
+
+            {/*Probando cookies*/}
+            {mensajeBienvenida && (
+                <div className="bg-white text-indigo-900 p-4 rounded-lg shadow text-center mb-6 font-semibold">
+                    {mensajeBienvenida}
+                </div>
+            )}
+
 
 
             {/* Estadísticas */}

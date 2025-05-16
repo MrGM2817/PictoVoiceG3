@@ -7,7 +7,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#B3D8A8", // tu color de fondo personalizado
+        primary: "#B3D8A8",
+      },
+      fontFamily: {
+        montserrat: ['Montserrat', 'sans-serif'],
       },
     },
   },
