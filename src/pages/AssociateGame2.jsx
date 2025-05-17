@@ -13,7 +13,7 @@ import volverAtras from '../assets/retroceder.svg';
 import incorrecto from '../assets/incorrecto.svg';
 import correcto from '../assets/correcto.svg';
 import advertencia from '../assets/advertencia.svg';
-import bannerJuegoCompletado from '../assets/bannerJuegoCompletado.svg';
+import bannerJuegoCompletado2 from '../assets/bannerJuegoCompletado2.svg';
 
 function AssociateGame2() {
     const [pairs] = useState([
@@ -23,6 +23,7 @@ function AssociateGame2() {
     ]);
 
     const [selectedWord, setSelectedWord] = useState(null);
+    const [selectedImage, setSelectedImage] = useState(null); // estado para imagen seleccionada momentáneamente
     const [imageSelections, setImageSelections] = useState({});
     const [showResults, setShowResults] = useState(false);
     const [showSkipModal, setShowSkipModal] = useState(false);
@@ -50,6 +51,12 @@ function AssociateGame2() {
                 updated[imageWord] = selectedWord;
                 return updated;
             });
+
+            // Marca la imagen como seleccionada momentáneamente
+            setSelectedImage(imageWord);
+
+            // Limpia la selección después de 300ms para que el borde no quede fijo
+            setTimeout(() => setSelectedImage(null), 300);
         }
     };
 
@@ -65,7 +72,7 @@ function AssociateGame2() {
         setShowResults(true);
     };
 
-    if (gameCompleted) return <GameCompletedScreen bannerImage={bannerJuegoCompletado} />;
+    if (gameCompleted) return <GameCompletedScreen bannerImage={bannerJuegoCompletado2} />;
 
     return (
         <div className="min-h-screen bg-primary p-4 flex flex-col relative">
@@ -90,30 +97,9 @@ function AssociateGame2() {
                 Toca una palabra y luego la imagen que crees que corresponde. Se pintarán del mismo color.
             </p>
 
-            {allMatched && !showResults && (
-                <div className="self-center mb-6">
-                    <button
-                        className="bg-teal-400 text-white px-4 py-2 rounded-lg shadow hover:bg-teal-500 transition"
-                        onClick={() => setShowResults(true)}
-                    >
-                        Verificar respuestas
-                    </button>
-                </div>
-            )}
-
-            {showResults && (
-                <div className="self-center mt-4">
-                    <button
-                        className="bg-blue-600 text-white px-6 py-2 mb-4 rounded-md shadow hover:bg-blue-700 transition"
-                        onClick={() => setGameCompleted(true)}
-                    >
-                        Continuar
-                    </button>
-                </div>
-            )}
-
             <div className="flex flex-grow justify-center items-center">
                 <div className="grid grid-cols-2 gap-6 max-w-xl w-full">
+                    {/* Palabras */}
                     <div className="flex flex-col space-y-4 items-center">
                         {pairs.map((pair) => {
                             const matchedImage = Object.entries(imageSelections).find(([, w]) => w === pair.word)?.[0];
@@ -134,6 +120,7 @@ function AssociateGame2() {
                         })}
                     </div>
 
+                    {/* Imágenes */}
                     <div className="flex flex-col space-y-4 items-center">
                         {pairs.map((pair) => (
                             <ImageCard
@@ -147,11 +134,35 @@ function AssociateGame2() {
                                 onClick={handleImageClick}
                                 correctoIcon={correcto}
                                 incorrectoIcon={incorrecto}
+                                isSelected={selectedImage === pair.word} // Aquí pasamos si la imagen está seleccionada
                             />
                         ))}
                     </div>
                 </div>
             </div>
+
+            {/* Botones debajo de las tarjetas */}
+            {allMatched && !showResults && (
+                <div className="self-center my-6">
+                    <button
+                        className="bg-teal-400 text-white px-4 py-2 rounded-lg shadow hover:bg-teal-500 transition"
+                        onClick={() => setShowResults(true)}
+                    >
+                        Verificar respuestas
+                    </button>
+                </div>
+            )}
+
+            {showResults && (
+                <div className="self-center my-6">
+                    <button
+                        className="bg-blue-600 text-white px-6 py-2 rounded-md shadow hover:bg-blue-700 transition"
+                        onClick={() => setGameCompleted(true)}
+                    >
+                        Continuar
+                    </button>
+                </div>
+            )}
 
             {showSkipModal && (
                 <ConfirmationModal

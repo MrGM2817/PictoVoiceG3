@@ -58,7 +58,8 @@ export default function GamesPage() {
             date: "13/11/24",
             duration: "10 minutes",
             category: "None",
-            bg: escuchar
+            bg: escuchar,
+            path: "/escuchar-conectar-g3"
         },
     ]
 
@@ -97,13 +98,7 @@ export default function GamesPage() {
                                 <p className="text-sm mt-1">Juego {game.id}</p>
                                 <p className="text-sm">{game.date} • {game.duration} • Categoría: {game.category}</p>
                             </div>
-                            {/*<button*/}
-                            {/*    className="flex-shrink-0 hover:scale-110 transition-transform"*/}
-                            {/*    style={{ minWidth: '40px', minHeight: '40px' }}*/}
-                            {/*>*/}
-                            {/*    <img src={playIcon} alt="Jugar" className="w-10 h-10" />*/}
-                            {/*</button>*/}
-                            {/* Enlace al juego */}
+
                             {game.path && (
                                 <Link
                                     to={game.path}

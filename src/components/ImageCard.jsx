@@ -8,6 +8,7 @@ function ImageCard({
                        onClick,
                        correctoIcon,
                        incorrectoIcon,
+                       isSelected,
                    }) {
     const bgResultColor = showResults
         ? (isCorrect ? '#F2FFEC' : '#FFF2F2')
@@ -18,7 +19,9 @@ function ImageCard({
     return (
         <div
             onClick={() => onClick(word)}
-            className="relative shadow-md rounded-lg flex items-center justify-center w-32 h-32 cursor-pointer transition-all duration-200 overflow-hidden"
+            className={`relative shadow-md rounded-lg flex items-center justify-center w-32 h-32 cursor-pointer transition-all duration-200 overflow-hidden
+                ${isSelected ? 'ring-2 ring-blue-400' : ''}
+            `}
             style={{ backgroundColor: bgResultColor }}
         >
             <img
@@ -27,7 +30,6 @@ function ImageCard({
                 className="w-full h-full object-contain"
             />
 
-            {/* Mostrar overlay SOLO si ya fue seleccionada */}
             {showOverlay && (
                 <div
                     className="absolute inset-0 rounded-lg"
