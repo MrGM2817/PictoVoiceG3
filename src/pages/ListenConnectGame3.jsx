@@ -26,19 +26,18 @@ const audioRounds = [
     { audio: audioCalma, correctEmotion: 'Calma' },
 ];
 
-// Función para barajar array (Fisher-Yates)
 function shuffleArray(array) {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
     }
-    return shuffled;
+    return newArray;
 }
 
 function ListenConnectGame3() {
-    const [currentRound, setCurrentRound] = useState(0);
     const [shuffledRounds, setShuffledRounds] = useState([]);
+    const [currentRound, setCurrentRound] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
     const [selectedEmotion, setSelectedEmotion] = useState(null);
     const [showResults, setShowResults] = useState(false);
@@ -59,16 +58,10 @@ function ListenConnectGame3() {
         'Confusión',
     ];
 
-    // Barajar los audios al montar el componente
     useEffect(() => {
         setShuffledRounds(shuffleArray(audioRounds));
     }, []);
 
-    useEffect(() => {
-        if (shuffledRounds.length > 0 && currentRound >= shuffledRounds.length) {
-            setGameCompleted(true);
-        }
-    }, [currentRound, shuffledRounds]);
 
     const handlePlayAudio = () => {
         if (isPlaying || !audioRef.current) return;
@@ -87,7 +80,9 @@ function ListenConnectGame3() {
         setIsPlaying(false);
 
         const nextRound = currentRound + 1;
+
         if (nextRound >= shuffledRounds.length) {
+            // Aquí marcamos completado SOLO después de que el usuario termine la última ronda
             setGameCompleted(true);
         } else {
             setCurrentRound(nextRound);
@@ -110,7 +105,7 @@ function ListenConnectGame3() {
 
     if (gameCompleted) return <GameCompletedScreen bannerImage={bannerJuegoCompletado3} />;
 
-    if (shuffledRounds.length === 0) return <div>Cargando...</div>; // espera hasta que se barajen
+    if (shuffledRounds.length === 0) return null; // Esperar a que se mezclen los audios
 
     const currentAudio = shuffledRounds[currentRound];
 
@@ -133,6 +128,11 @@ function ListenConnectGame3() {
             <h1 className="text-2xl font-bold text-gray-800 mt-4 mb-2 text-center max-w-xl w-full self-center">
                 Escucha la voz y asocia el tono con la emoción que expresa
             </h1>
+
+            <p className="text-gray-600 text-center mb-4">
+                Ronda {currentRound + 1} de {shuffledRounds.length}
+            </p>
+
             <p className="text-gray-700 mb-6 max-w-xl w-full text-center self-center">
                 Selecciona la tarjeta con la emoción expresada en el audio
             </p>

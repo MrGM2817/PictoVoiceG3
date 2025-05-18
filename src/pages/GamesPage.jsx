@@ -41,7 +41,8 @@ export default function GamesPage() {
             date: "18/11/24",
             duration: "3 minutes",
             category: "None",
-            bg: frases
+            bg: frases,
+            path: "/arrastrar-formar-g1"
         },
         {
             id: 2,
