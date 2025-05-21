@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -17,14 +18,25 @@ import audioSorpresa from '../assets/sorpresaAudio.mp3';
 import audioCalma from '../assets/calmaAudio.mp3';
 import bannerJuegoCompletado3 from "../assets/bannerJuegoCompletado3.svg";
 
+import alegriaImg from '../assets/emocionado.png';
+import tristeImg from '../assets/trizte.png';
+import enojoImg from '../assets/enfadada.png'
+import miedoImg from '../assets/miedo2.png';
+import sorpresaImg from '../assets/sorpresa.png';
+import calmaImg from '../assets/calma.png';
+import confusoImg from '../assets/confusión.png';
+import verguenzaImg from '../assets/vergüenza.png';
+import desmotivadoImg from '../assets/desmotivada.png';
+
 const audioRounds = [
-    { audio: audioAlegria, correctEmotion: 'Alegría' },
-    { audio: audioTristeza, correctEmotion: 'Tristeza' },
-    { audio: audioEnojo, correctEmotion: 'Enojo' },
-    { audio: audioMiedo, correctEmotion: 'Miedo' },
-    { audio: audioSorpresa, correctEmotion: 'Sorpresa' },
-    { audio: audioCalma, correctEmotion: 'Calma' },
+    { audio: audioAlegria, correctEmotion: 'Alegría', image: alegriaImg },
+    { audio: audioTristeza, correctEmotion: 'Tristeza', image: tristeImg },
+    { audio: audioEnojo, correctEmotion: 'Enojo', image: enojoImg },
+    { audio: audioMiedo, correctEmotion: 'Miedo', image: miedoImg },
+    { audio: audioSorpresa, correctEmotion: 'Sorpresa', image: sorpresaImg },
+    { audio: audioCalma, correctEmotion: 'Calma', image: calmaImg },
 ];
+
 
 function shuffleArray(array) {
     const newArray = [...array];
@@ -47,16 +59,17 @@ function ListenConnectGame3() {
     const audioRef = useRef(null);
 
     const emotionOptions = [
-        'Alegría',
-        'Tristeza',
-        'Enojo',
-        'Miedo',
-        'Sorpresa',
-        'Calma',
-        'Vergüenza',
-        'Desprecio',
-        'Confusión',
+        { label: 'Alegría', image: alegriaImg },
+        { label: 'Tristeza', image: tristeImg },
+        { label: 'Enojo', image: enojoImg },
+        { label: 'Miedo', image: miedoImg },
+        { label: 'Sorpresa', image: sorpresaImg },
+        { label: 'Calma', image: calmaImg },
+        { label: 'Vergüenza', image: verguenzaImg },
+        { label: 'Desprecio', image: desmotivadoImg }, // si no tienes imagen de desprecio puedes usar esta temporalmente
+        { label: 'Confusión', image: confusoImg },
     ];
+
 
     useEffect(() => {
         setShuffledRounds(shuffleArray(audioRounds));
@@ -139,30 +152,36 @@ function ListenConnectGame3() {
 
             <div className="grid grid-cols-3 gap-4 max-w-3xl w-full mx-auto">
                 <div></div>
-                <div className="bg-white flex items-center justify-center py-6 rounded-xl shadow-md">
+                <div
+                    className="bg-white flex flex-col items-center justify-center py-6 px-4 rounded-xl shadow-md hover:shadow-lg transition relative animate-pulse"
+                    onClick={handlePlayAudio}
+                    style={{ cursor: isPlaying ? 'not-allowed' : 'pointer', opacity: isPlaying ? 0.5 : 1 }}
+                >
                     <img
                         src={audioIcon}
                         alt="Reproducir audio"
-                        className={`w-8 h-8 cursor-pointer ${isPlaying ? 'opacity-50' : 'hover:scale-105 transition'}`}
-                        onClick={handlePlayAudio}
+                        className="w-16 h-16 mb-2 transition-transform duration-300 hover:scale-110"
                     />
+                    <p className="text-indigo-800 font-semibold text-sm text-center">Presioname para escuchar</p>
                     <audio ref={audioRef} src={currentAudio.audio} />
                 </div>
+
                 <div></div>
 
-                {emotionOptions.map((emotion) => {
-                    const isCorrect = showResults && emotion === currentAudio.correctEmotion;
-                    const isIncorrect = showResults && emotion === selectedEmotion && emotion !== currentAudio.correctEmotion;
+                {emotionOptions.map(({ label, image }) => {
+                    const isCorrect = showResults && label === currentAudio.correctEmotion;
+                    const isIncorrect = showResults && label === selectedEmotion && label !== currentAudio.correctEmotion;
 
                     return (
                         <div
-                            key={emotion}
-                            className={`bg-white text-center text-gray-800 font-semibold py-6 rounded-xl shadow-md cursor-pointer relative ${
-                                selectedEmotion === emotion ? 'ring-2 ring-blue-400' : ''
+                            key={label}
+                            className={`bg-white text-center py-4 rounded-xl shadow-md cursor-pointer relative ${
+                                selectedEmotion === label ? 'ring-2 ring-blue-400' : ''
                             } hover:bg-gray-100 transition`}
-                            onClick={() => !showResults && setSelectedEmotion(emotion)}
+                            onClick={() => !showResults && setSelectedEmotion(label)}
                         >
-                            {emotion}
+                            <img src={image} alt={label} className="w-20 h-20 mx-auto mb-2 object-contain" />
+                            <span className="text-gray-800 font-semibold">{label}</span>
                             {isCorrect && (
                                 <img src={correcto} alt="Correcto" className="absolute top-2 right-2 w-6 h-6" />
                             )}
@@ -172,6 +191,7 @@ function ListenConnectGame3() {
                         </div>
                     );
                 })}
+
             </div>
 
             {!showResults && selectedEmotion && (

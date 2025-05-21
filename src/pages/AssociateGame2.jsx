@@ -6,9 +6,9 @@ import ImageCard from '../components/ImageCard';
 import ConfirmationModal from '../components/ConfirmationModal';
 import GameCompletedScreen from '../components/GameCompletedScreen';
 
-import tristeFoto from '../assets/triste.svg';
-import felizFoto from '../assets/feliz.svg';
-import molestoFoto from '../assets/molesto.svg';
+import temerosaFoto from '../assets/temerosa.png';
+import felizFoto from '../assets/feliz.png';
+import molestoFoto from '../assets/molesto.png';
 import volverAtras from '../assets/retroceder.svg';
 import incorrecto from '../assets/incorrecto.svg';
 import correcto from '../assets/correcto.svg';
@@ -19,7 +19,7 @@ function AssociateGame2() {
     const [pairs] = useState([
         { word: 'Feliz', image: felizFoto, color: '#D1C7A8' },
         { word: 'Molesto', image: molestoFoto, color: '#A7C6ED' },
-        { word: 'Triste', image: tristeFoto, color: '#F1B6B6' },
+        { word: 'Temerosa', image: temerosaFoto, color: '#F1B6B6' },
     ]);
 
     const [selectedWord, setSelectedWord] = useState(null);
@@ -32,7 +32,7 @@ function AssociateGame2() {
     const correctAssociations = {
         'Feliz': 'Feliz',
         'Molesto': 'Molesto',
-        'Triste': 'Triste',
+        'Temerosa': 'Temerosa',
     };
 
     const handleWordClick = (word) => {
