@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { completarJuego } from '../components/completeGame.jsx';
 
 import WordCard from '../components/WordCard';
 import ImageCard from '../components/ImageCard';
@@ -157,7 +158,7 @@ function AssociateGame2() {
                 <div className="self-center my-6">
                     <button
                         className="bg-blue-600 text-white px-6 py-2 rounded-md shadow hover:bg-blue-700 transition"
-                        onClick={() => setGameCompleted(true)}
+                        onClick={() => completarJuego('juego2Completado', setGameCompleted)}
                     >
                         Continuar
                     </button>

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { completarJuego } from '../components/completeGame.jsx';
 
 import volverAtras from '../assets/retroceder.svg';
 import correrSVG from '../assets/correr.svg';
@@ -174,6 +175,8 @@ function DragFormGame1() {
         setShowResults2(false);
         setIsCorrect2(null);
     };
+
+
 
     if (gameCompleted) return <GameCompletedScreen bannerImage={bannerJuegoCompletado3} />;
 
@@ -405,7 +408,7 @@ function DragFormGame1() {
                                     <p className="text-green-600 font-bold">¡Respuesta correcta!</p>
                                     <button
                                         className="mt-2 px-6 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white transition"
-                                        onClick={() => setGameCompleted(true)}
+                                        onClick={() => completarJuego('juego1Completado', setGameCompleted)}
                                     >
                                         Continuar
                                     </button>

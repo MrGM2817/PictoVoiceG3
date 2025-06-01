@@ -1,6 +1,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { completarJuego } from '../components/completeGame.jsx';
 
 import volverAtras from '../assets/retroceder.svg';
 import ConfirmationModal from '../components/ConfirmationModal';
@@ -96,7 +97,7 @@ function ListenConnectGame3() {
 
         if (nextRound >= shuffledRounds.length) {
             // Aquí marcamos completado SOLO después de que el usuario termine la última ronda
-            setGameCompleted(true);
+            completarJuego('juego3Completado', setGameCompleted);
         } else {
             setCurrentRound(nextRound);
             setSelectedEmotion(null);
