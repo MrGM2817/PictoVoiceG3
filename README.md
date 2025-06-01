@@ -15,6 +15,9 @@
 │   │   ├── ImageCard.jsx         <-- componente para mostrar imágenes con overlays dinámicos
 │   │   ├── GameCompletedScreen.jsx     <-- componente para mostrar pantalla de juego completado
 │   │   └── ConfirmationModal.jsx         <-- componente modal para confirmar si el usuario desea omitir el juego
+│   │   ├── AchievementUnlockedModal.jsx  <-- modal para notificar logro desbloqueado
+│   │   ├── achievements.js            <-- componente para manejar logros 
+│   │   └── completeGame.js            <-- componente para manejar estado de juegos completados 
 │   ├── pages/         <-- pantallas principales (rutas de la app)
 │   │   ├── InicioPage.jsx        <-- pantalla de bienvenida con botón "EMPEZAR"
 │   │   ├── HomePage.jsx          <-- pantalla principal con estadísticas y acceso a juegos
