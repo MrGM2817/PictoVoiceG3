@@ -1,6 +1,9 @@
 export default function UnavailableToast() {
     return (
-        <div className="fixed bottom-20 left-1/2 transform -translate-x-1/2 bg-blue-950 text-white px-6 py-3 rounded-full shadow-lg z-50 text-center text-sm max-w-xs w-auto">
+        <div className="fixed bottom-20 left-1/2 transform -translate-x-1/2
+                        bg-gradient-to-r from-indigo-200 to-purple-200
+                        text-indigo-900 p-4 rounded-2xl shadow-md
+                        text-center text-sm max-w-xs w-auto z-50 font-medium">
             Esta función no está disponible aún.
         </div>
     );

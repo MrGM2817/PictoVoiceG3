@@ -88,13 +88,17 @@ export default function HomePage() {
                 {showSidebar && <SidebarSettings onClose={() => setShowSidebar(false)} />}
 
                 {mensajeBienvenida && (
-                    <div className="bg-white text-indigo-900 p-4 rounded-lg shadow text-center mb-6 font-semibold">
+                    <h2 className="text-2xl font-bold text-indigo-900 mb-8 text-center md:text-left">
                         {mensajeBienvenida}
-                    </div>
+                    </h2>
+
+
+
+
                 )}
 
-                <div className="grid grid-cols-2 gap-4 mb-8">
-                    <StatCard icon={coheteIcon} label="Juegos Disponibles" count={3} />
+                <div className="grid grid-cols-2 gap-6 mb-8">
+                <StatCard icon={coheteIcon} label="Juegos Disponibles" count={3} />
                     <StatCard icon={completadosIcon} label="Juegos Completados" count={completedCount} />
                     <StatCard icon={categoriasIcon} label="Categorías Disponibles" count={0} />
                     <StatCard icon={logrosIcon} label="Logros" count={completedAchievements} />
@@ -157,7 +161,7 @@ function GameCard({ number, bg, to }) {
     const content = (
         <>
             <div className="absolute inset-0 bg-white bg-opacity-80" />
-            <div className="relative z-10 font-semibold text-black text-center">
+            <div className="relative z-10 font-bold text-black text-lg md:text-xl text-center">
                 Juego {number}
             </div>
         </>
@@ -166,14 +170,20 @@ function GameCard({ number, bg, to }) {
     return to ? (
         <Link
             to={to}
-            className="relative rounded-lg overflow-hidden shadow-md h-24 flex items-center justify-center"
+            className="relative rounded-lg overflow-hidden shadow-md h-24 flex items-center justify-center
+             cursor-pointer hover:shadow-lg transition-transform duration-200"
             style={{
                 backgroundImage: `url(${bg})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
+                transformOrigin: 'center',
+                transition: 'transform 0.2s ease',
             }}
+            onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.03)'}
+            onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
         >
-            {content}
+
+        {content}
         </Link>
     ) : (
         <div

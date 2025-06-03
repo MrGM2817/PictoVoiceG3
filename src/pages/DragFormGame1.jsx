@@ -295,7 +295,7 @@ function DragFormGame1() {
                     {!showResults && slots.every((s) => s !== null) && (
                         <div className="self-center mt-6">
                             <button
-                                className="bg-teal-500 text-white px-4 py-2 rounded-md shadow hover:bg-teal-600 transition"
+                                className="bg-white text-indigo-900 px-6 py-2 rounded-md font-semibold shadow-md hover:bg-indigo-900 hover:text-white active:bg-indigo-800 active:text-white transition-colors duration-500 ease-out"
                                 onClick={handleVerify}
                             >
                                 Verificar respuesta
@@ -310,7 +310,7 @@ function DragFormGame1() {
                                     <img src={correcto} alt="Correcto" className="w-12 h-12" />
                                     <p className="text-green-600 font-bold">¡Respuesta correcta!</p>
                                     <button
-                                        className="mt-2 px-6 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white transition"
+                                        className="bg-white text-indigo-900 px-6 py-2 rounded-md font-semibold shadow-md hover:bg-indigo-900 hover:text-white active:bg-indigo-800 active:text-white transition-colors duration-500 ease-out"
                                         onClick={handleContinue}
                                     >
                                         Continuar
@@ -391,7 +391,7 @@ function DragFormGame1() {
                     {!showResults2 && selectedImage && (
                         <div className="self-center mt-6">
                             <button
-                                className="bg-teal-500 text-white px-4 py-2 rounded-md shadow hover:bg-teal-600 transition"
+                                className="bg-white text-indigo-900 px-6 py-2 rounded-md font-semibold shadow-md hover:bg-indigo-900 hover:text-white active:bg-indigo-800 active:text-white transition-colors duration-500 ease-out"
                                 onClick={handleVerify2}
                             >
                                 Verificar respuesta
@@ -407,7 +407,7 @@ function DragFormGame1() {
                                     <img src={correcto} alt="Correcto" className="w-12 h-12" />
                                     <p className="text-green-600 font-bold">¡Respuesta correcta!</p>
                                     <button
-                                        className="mt-2 px-6 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white transition"
+                                        className="bg-white text-indigo-900 px-6 py-2 rounded-md font-semibold shadow-md hover:bg-indigo-900 hover:text-white active:bg-indigo-800 active:text-white transition-colors duration-500 ease-out"
                                         onClick={() => completarJuego('juego1Completado', setGameCompleted)}
                                     >
                                         Continuar

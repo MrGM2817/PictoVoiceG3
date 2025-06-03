@@ -198,7 +198,7 @@ function ListenConnectGame3() {
             {!showResults && selectedEmotion && (
                 <div className="self-center mt-6">
                     <button
-                        className="bg-teal-500 text-white px-4 py-2 rounded-md shadow hover:bg-teal-600 transition"
+                        className="bg-white text-indigo-900 px-6 py-2 rounded-md font-semibold shadow-md hover:bg-indigo-900 hover:text-white active:bg-indigo-800 active:text-white transition-colors duration-500 ease-out"
                         onClick={handleVerify}
                     >
                         Verificar respuesta
@@ -209,7 +209,7 @@ function ListenConnectGame3() {
             {showResults && (
                 <div className="self-center mt-6">
                     <button
-                        className="bg-blue-600 text-white px-6 py-2 rounded-md shadow hover:bg-blue-700 transition"
+                        className="bg-white text-indigo-900 px-6 py-2 rounded-md font-semibold shadow-md hover:bg-indigo-900 hover:text-white active:bg-indigo-800 active:text-white transition-colors duration-500 ease-out"
                         onClick={handleContinue}
                     >
                         Continuar

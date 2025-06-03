@@ -23,10 +23,13 @@ export default function InicioPage() {
                 <img src={pictoVoice} alt="PictoVoice" className="mx-auto mb-44" />
                 <button
                     onClick={handleStart}
-                    className="bg-white text-indigo-900 px-20 py-3 rounded-md font-semibold"
+                    className="bg-white text-indigo-900 px-20 py-3 rounded-md font-semibold shadow-md
+                                hover:bg-indigo-900 hover:text-white active:bg-indigo-800 active:text-white
+                                    transition-colors duration-500 ease-out "
                 >
                     EMPEZAR
                 </button>
+
             </div>
         </div>
     );

@@ -19,7 +19,7 @@ function GameCompletedScreen({ bannerImage }) {
             </div>
 
             <button
-                className="mt-6 mb-8 px-16 bg-teal-400 text-white py-3 rounded-md shadow hover:bg-teal-600 transition"
+                className="mt-6 mb-8 px-16 py-3 bg-white text-indigo-900 rounded-md font-semibold shadow-md hover:bg-indigo-900 hover:text-white active:bg-indigo-800 active:text-white transition-colors duration-500 ease-out"
                 onClick={() => navigate('/games')}
             >
                 Continuar
